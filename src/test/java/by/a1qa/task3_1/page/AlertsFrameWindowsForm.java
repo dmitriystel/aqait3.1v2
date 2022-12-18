@@ -3,6 +3,7 @@ package by.a1qa.task3_1.page;
 import by.a1qa.task3_1.element.Button;
 import by.a1qa.task3_1.element.Label;
 import by.a1qa.task3_1.util.AlertUtil;
+import by.a1qa.task3_1.util.CustomLogger;
 import by.a1qa.task3_1.util.RandomStringGenerator;
 import by.a1qa.task3_1.wait.ConditionalWait;
 import org.openqa.selenium.By;
@@ -21,6 +22,7 @@ public class AlertsFrameWindowsForm extends BaseForm {
     private By promptBoxBtnLocator = By.id("promtButton");
     private Button promptBoxBtn = new Button(promptBoxBtnLocator, "prompt box will appear button");
 
+
     // constructor to create an instance of the class
     public AlertsFrameWindowsForm() {
         super(alertsFrameAndWindowLabel, "alertsFrameAndWindowsPage");
@@ -30,23 +32,29 @@ public class AlertsFrameWindowsForm extends BaseForm {
     public AlertsFrameWindowsForm openAlertYouClickedBtn(){
         ConditionalWait.waitToBeClickable(toSeeAlertBtn);
         toSeeAlertBtn.click();
+        CustomLogger.info("Step 3. Alerts form has appeared on page with text - " +  AlertUtil.getText());
         return this;
     }
     // 4/6/8. Close alert
     public AlertsFrameWindowsForm closeAlert(){
      AlertUtil.acceptAlert();
+     CustomLogger.info("Next step. Alert has closed ");
+
         return this;
     }
     // 5. Open alert -  "Do you confirm action?"
     public AlertsFrameWindowsForm openAlertDoYouConfirmActionBtn(){
         ConditionalWait.waitToBeClickable(confirmBoxBtn);
         confirmBoxBtn.click();
+        CustomLogger.info("Step 5. Alerts form has appeared on page with text - " +  AlertUtil.getText());
+
         return this;
     }
     // 7. Open alert -  "Please enter your name"
     public AlertsFrameWindowsForm openAlertPleaseEnterYourNameBtn(){
         ConditionalWait.waitToBeClickable(promptBoxBtn);
         promptBoxBtn.click();
+        CustomLogger.info("Step 7. Alerts form has appeared on page with text - " +  AlertUtil.getText());
         return this;
     }
     // 8. Enter randomly generated text
@@ -55,5 +63,7 @@ public class AlertsFrameWindowsForm extends BaseForm {
         AlertUtil.sendKeys(randomString);
         return this;
     }
+
+
 
 }

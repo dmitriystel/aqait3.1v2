@@ -4,6 +4,7 @@ import by.a1qa.task3_1.element.Button;
 import by.a1qa.task3_1.element.Label;
 import by.a1qa.task3_1.util.BrowserUtil;
 import by.a1qa.task3_1.util.ConfigManager;
+import by.a1qa.task3_1.util.CustomLogger;
 import by.a1qa.task3_1.wait.ConditionalWait;
 import org.openqa.selenium.By;
 
@@ -24,10 +25,16 @@ public class MainPageForm extends BaseForm {
     private By alertsBtnLocator = By.xpath("//span[contains(text(), 'Alerts')]//parent::li");
     private Button alertsBtn = new Button(alertsBtnLocator, "Alerts Button");
 
+    // Alert form label
+    private By alertFormLabelLocator = By.xpath("//div[contains(@id, 'Alerts')]");
+    private Label alertFormLabel = new Label(alertFormLabelLocator, "alertFormLabel");
+
+
     // 1. Open main page
     public MainPageForm openPage() {
         BrowserUtil.goToURL(ConfigManager.getURL());
         isPageOpened();
+        CustomLogger.info("Step 1. Main page is open.");
         return this;
     }
     // 2. Open alerts form
@@ -39,11 +46,13 @@ public class MainPageForm extends BaseForm {
         ConditionalWait.waitToBeClickable(alertsBtn);
         scrollDown();
         alertsBtn.click();
+        isAlertFormLabelOpen();
+        CustomLogger.info("Step 2. Alerts form has appeared on page");
         return new AlertsFrameWindowsForm();
     }
 
 
-
+    public boolean isAlertFormLabelOpen() { return alertFormLabel.isDisplayed(); }
 
 
 
