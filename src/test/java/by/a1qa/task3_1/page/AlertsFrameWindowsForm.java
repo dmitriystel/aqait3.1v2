@@ -18,9 +18,21 @@ public class AlertsFrameWindowsForm extends BaseForm {
     // 5. "Click me" button(locator and button). Click on "On button click, confirm box will appear" button
     private By confirmBoxBtnLocator = By.id("confirmButton");
     private Button confirmBoxBtn = new Button(confirmBoxBtnLocator, "confirm box will appear button");
+    // 6. Text "You selected Ok" (locator and label) has appeared on page.
+    private By confirmBoxResultLabelLocator = By.id("confirmResult");
+    private Label confirmBoxResultLabel = new Label(confirmBoxResultLabelLocator, "Confirm box result after alert");
+
+
     // 7. "Click me" button(locator and button). Click on "On button click, prompt box will appear" button
     private By promptBoxBtnLocator = By.id("promtButton");
     private Button promptBoxBtn = new Button(promptBoxBtnLocator, "prompt box will appear button");
+
+
+
+    // Alerts form after click Alerts btn
+    private By alertFormLocator = By.id("javascriptAlertsWrapper");
+    private Label alertForm = new Label(alertFormLocator, "alertFormLabel");
+
 
 
     // constructor to create an instance of the class
@@ -30,26 +42,36 @@ public class AlertsFrameWindowsForm extends BaseForm {
 
     // 3. open alert - "You clicked a button" is open
     public AlertsFrameWindowsForm openAlertYouClickedBtn(){
+        scrollDown();
         ConditionalWait.waitToBeClickable(toSeeAlertBtn);
         toSeeAlertBtn.click();
-        CustomLogger.info("Step 3. Alerts form has appeared on page with text - " +  AlertUtil.getText());
+        CustomLogger.info(this.getFormName() + " : openAlertYouClickedBtn() with text - " +  AlertUtil.getText());
         return this;
     }
     // 4/6/8. Close alert
     public AlertsFrameWindowsForm closeAlert(){
-     AlertUtil.acceptAlert();
-     CustomLogger.info("Next step. Alert has closed ");
-
+        CustomLogger.info(this.getFormName() + " : closeAlert()");
+        AlertUtil.acceptAlert();
         return this;
     }
     // 5. Open alert -  "Do you confirm action?"
     public AlertsFrameWindowsForm openAlertDoYouConfirmActionBtn(){
         ConditionalWait.waitToBeClickable(confirmBoxBtn);
         confirmBoxBtn.click();
-        CustomLogger.info("Step 5. Alerts form has appeared on page with text - " +  AlertUtil.getText());
-
+        CustomLogger.info(this.getFormName() + " : openAlertDoYouConfirmActionBtn() with text - " +  AlertUtil.getText());
         return this;
     }
+    // 6. Text "You selected Ok" (locator and label) has appeared on page.
+    public String getConfirmBoxResultLabelText(){
+        scrollDown();
+        ConditionalWait.waitToBeClickable(confirmBoxResultLabel);
+        confirmBoxResultLabel.isDisplayed();
+        CustomLogger.info(this.getFormName() + " : getConfirmBoxResultLabelText() with text - " +  AlertUtil.getText());
+        return confirmBoxResultLabel.getText();
+    }
+
+
+
     // 7. Open alert -  "Please enter your name"
     public AlertsFrameWindowsForm openAlertPleaseEnterYourNameBtn(){
         ConditionalWait.waitToBeClickable(promptBoxBtn);
@@ -63,6 +85,15 @@ public class AlertsFrameWindowsForm extends BaseForm {
         AlertUtil.sendKeys(randomString);
         return this;
     }
+
+//    public boolean isAlertFormAppeared() { return alertForm.isDisplayed();}
+
+    public String getAlertText() {return AlertUtil.getText();}
+
+    public boolean isAlertPresent(){ return AlertUtil.isDialogPresent(); }
+
+
+
 
 
 

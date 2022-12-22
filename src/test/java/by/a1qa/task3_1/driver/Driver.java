@@ -16,7 +16,7 @@ public class Driver {
         if (driver == null) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--incognito");
+            options.addArguments("--incognito"); // todo in config file
             driver = new ChromeDriver(options);
             driver.manage().window().maximize();
         }
