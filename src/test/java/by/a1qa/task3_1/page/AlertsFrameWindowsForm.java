@@ -28,10 +28,30 @@ public class AlertsFrameWindowsForm extends BaseForm {
     private Button promptBoxBtn = new Button(promptBoxBtnLocator, "prompt box will appear button");
 
 
-
     // Alerts form after click Alerts btn
     private By alertFormLocator = By.id("javascriptAlertsWrapper");
     private Label alertForm = new Label(alertFormLocator, "alertFormLabel");
+
+    // Nested Frames button (locator and label) on Alerts, Frame & Windows form
+    private By nestedFramesButtonLocator = By.xpath("//span[contains(text(), 'Nested')]//parent::li");
+    private Button nestedFramesButton = new Button(nestedFramesButtonLocator, "Nested Frames Button");
+
+
+    private By framesButtonLocator =  By.xpath("//span[text()='Frames']//parent::li");
+    private Button framesButton = new Button(framesButtonLocator, "Frames Button");
+
+
+    // frames locator and label
+    private By framesLabelLocator = By.xpath("//div[text()='Frames']");
+    private Label framesLabel = new Label(framesLabelLocator, "framesLabel");
+
+
+
+    public void framesButtonClick() {
+        scrollDown();
+        ConditionalWait.waitToBeClickable(framesButton);
+        framesButton.click();}
+
 
 
 
@@ -64,10 +84,11 @@ public class AlertsFrameWindowsForm extends BaseForm {
     // 6. Text "You selected Ok" (locator and label) has appeared on page.
     public String getConfirmBoxResultLabelText(){
         scrollDown();
-        ConditionalWait.waitToBeClickable(confirmBoxResultLabel);
         confirmBoxResultLabel.isDisplayed();
-        CustomLogger.info(this.getFormName() + " : getConfirmBoxResultLabelText() with text - " +  AlertUtil.getText());
+        ConditionalWait.waitToBeClickable(confirmBoxResultLabel);
+        CustomLogger.info(this.getFormName() + " : getConfirmBoxResultLabelText() with text - " + confirmBoxResultLabel.getText());
         return confirmBoxResultLabel.getText();
+
     }
 
 
@@ -76,15 +97,26 @@ public class AlertsFrameWindowsForm extends BaseForm {
     public AlertsFrameWindowsForm openAlertPleaseEnterYourNameBtn(){
         ConditionalWait.waitToBeClickable(promptBoxBtn);
         promptBoxBtn.click();
-        CustomLogger.info("Step 7. Alerts form has appeared on page with text - " +  AlertUtil.getText());
+        CustomLogger.info(this.getFormName() + " : openAlertPleaseEnterYourNameBtn() with text - " +  AlertUtil.getText());
         return this;
     }
+
+//    public String getPromptBoxResultLabelText() { return promptBoxResultLabel.getText(); }
+
+
+
+
     // 8. Enter randomly generated text
     public AlertsFrameWindowsForm enterRandomlyGeneratedText(){
+        ConditionalWait.waitUntilAlertIsPresent();
         String randomString = RandomStringGenerator.getRandomString();
         AlertUtil.sendKeys(randomString);
         return this;
     }
+
+
+
+
 
 //    public boolean isAlertFormAppeared() { return alertForm.isDisplayed();}
 
@@ -93,6 +125,11 @@ public class AlertsFrameWindowsForm extends BaseForm {
     public boolean isAlertPresent(){ return AlertUtil.isDialogPresent(); }
 
 
+    // 2.2. In a menu click Nested Frames button
+    public void nestedFramesButtonClick() {nestedFramesButton.click();}
+
+    // 2.3 Page with Frames form is open.
+    public boolean isFramesLabelOpen() { return framesLabel.isDisplayed(); }
 
 
 

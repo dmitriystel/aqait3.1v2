@@ -24,7 +24,7 @@ public class AlertUtil {
     public static void sendKeys(String keys) {
         Alert alert = ConditionalWait.waitUntilAlertIsPresent();
         alert.sendKeys(keys);
-        System.out.println(alert.getText());
+        System.out.println(alert.getText()); // delete
     }
 
 }

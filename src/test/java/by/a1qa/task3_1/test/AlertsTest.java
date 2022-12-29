@@ -45,12 +45,19 @@ public class AlertsTest extends BaseTest{
 
         alertsPage.closeAlert();    // 6
 
-        CustomLogger.info("Step 6. Assert if alert is closed.");
+        CustomLogger.info("Step 6.1 Assert if alert is closed.");
         Assert.assertFalse(alertsPage.isAlertPresent(), "Alert isn't closed");
 
-        CustomLogger.info("Step 6. Assert if 'You selected Ok' appeared on the page.");
+        CustomLogger.info("Step 6.2 Assert if 'You selected Ok' appeared on the page.");
         Assert.assertEquals(alertsPage.getConfirmBoxResultLabelText(), "You selected Ok",
                 "Alert with text 'You selected Ok' did not appear.");
+
+        alertsPage.openAlertPleaseEnterYourNameBtn();   // 7
+
+        CustomLogger.info("Step 7. Assert if alert with 'Please enter your name' has appeared on the page.");
+        Assert.assertEquals(alertsPage.getAlertText(), "Please enter your name",
+                "Alert with text 'Please enter your name' did not appear.");
+
 
 
     }

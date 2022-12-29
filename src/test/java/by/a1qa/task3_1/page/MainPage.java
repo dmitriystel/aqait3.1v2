@@ -31,6 +31,30 @@ public class MainPage extends BaseForm {
     private By alertsBtnLocator = By.xpath("//span[contains(text(), 'Alerts')]//parent::li");
     private Button alertsBtn = new Button(alertsBtnLocator, "Alerts Button");
 
+    // Nested Frames button (locator and label) on Alerts, Frame & Windows form
+    private By nestedFramesButtonLocator = By.xpath("//span[contains(text(), 'Nested')]//parent::li");
+    private Button nestedFramesButton = new Button(nestedFramesButtonLocator, "Nested Frames Button");
+
+
+    // 3.2. Elements button In the menu (locator and btn)
+    private By elementsButtonLocator = By.xpath("//h5[contains(text(), 'Elements')]//parent::div");
+    private Button elementsButton = new Button(elementsButtonLocator, "Elements button");
+
+//    4.2. Browser windows button (locator and btn)
+    private By browserWindowsButtonLocator = By.xpath("//span[contains(text(), 'Browser')]//parent::li");
+    private Button browserWindowsButton = new Button(browserWindowsButtonLocator, "Browser Windows button");
+
+
+
+
+    // 2.2. In a menu click Nested Frames button
+    public AlertsFrameWindowsForm nestedFramesButtonClick() {
+        scrollDown();
+        ConditionalWait.waitToBeClickable(nestedFramesButton);
+        nestedFramesButton.click();
+        return new AlertsFrameWindowsForm();
+    }
+
 
     // 1. Open main page
     public MainPage openMainPage() {
@@ -49,6 +73,7 @@ public class MainPage extends BaseForm {
         return this;
     }
 
+    // 1.2
     public AlertsFrameWindowsForm openAlertsForm(){
         CustomLogger.info(this.getFormName() + " : openAlertsForm()");
         ConditionalWait.waitToBeClickable(alertsBtn);
@@ -57,6 +82,23 @@ public class MainPage extends BaseForm {
         isPageOpened();
         return new AlertsFrameWindowsForm();
     }
+
+//    3.2 Click on Elements button In the menu
+public ElementsForm elementsButtonClick(){
+        scrollDown();
+    CustomLogger.info(this.getFormName() + " : elementsButtonClick()");
+    ConditionalWait.waitToBeClickable(elementsButton);
+    elementsButton.click();
+    return new ElementsForm();
+}
+
+
+// 4.2. In the menu click a Browser windows button
+    public SampleForm browserWindowsButtonClick() {
+        browserWindowsButton.click();
+        return new SampleForm();
+    }
+
 
 
 
