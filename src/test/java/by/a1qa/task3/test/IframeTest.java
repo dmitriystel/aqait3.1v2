@@ -13,7 +13,7 @@ import java.io.IOException;
 public class IframeTest extends BaseTest {
     @Test
     public void testIframe() throws IOException, ParseException {
-        CustomLogger.info("Alerts test starts.");
+        CustomLogger.info("Iframe test starts.");
         MainPage mainPage = new MainPage();
         BrowserUtil.goToURL(ConfigManager.getURL());
         CustomLogger.info("Step 1. Assert if the main page is open.");
