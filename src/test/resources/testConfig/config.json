@@ -1,8 +1,6 @@
 {
   "browserName": "chrome",
   "url": "https://demoqa.com",
-  "waitDuration": "10",
-  "options": [
-    "start-maximized"
-  ]
+  "waitDuration": "12",
+  "options": "start-maximized"
 }

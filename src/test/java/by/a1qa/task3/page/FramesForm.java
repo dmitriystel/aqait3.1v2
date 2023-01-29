@@ -5,9 +5,7 @@ import by.a1qa.task3.element.Label;
 import org.openqa.selenium.By;
 
 public class FramesForm extends BaseForm {
-
-    private static By framesLabelLocator = By.xpath("//div[text()='Frames']");
-    private static Label framesLabel = new Label(framesLabelLocator, "framesLabel");
+    private static Label framesLabel = new Label(By.xpath("//div[text()='Frames']"), "framesLabel");
 
     public FramesForm() {
         super(framesLabel, "framesLabel");

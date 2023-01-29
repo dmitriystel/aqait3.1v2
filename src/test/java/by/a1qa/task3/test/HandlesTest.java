@@ -2,26 +2,26 @@ package by.a1qa.task3.test;
 
 import by.a1qa.task3.page.*;
 import by.a1qa.task3.util.BrowserUtil;
+import by.a1qa.task3.util.ConfigManager;
 import by.a1qa.task3.util.CustomLogger;
+import org.json.simple.parser.ParseException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import java.io.IOException;
 
 public class HandlesTest extends BaseTest{
-
     @Test
-    public void testHandles(){
+    public void testHandles() throws IOException, ParseException {
         CustomLogger.info("Handles test starts.");
         MainPage mainPage = new MainPage();
-        mainPage.navigateToMainPage();
+        BrowserUtil.goToURL(ConfigManager.getURL());
         CustomLogger.info("Step 1. Assert if the main page is open.");
 
         Assert.assertTrue(mainPage.isPageOpened(), "Main page isn't open.");
 
-        mainPage.scrollDown();
         mainPage.clickAlertsFrameWindowsBtn();
         AlertsFrameWindowsForm alertsFrameWindowsForm = new AlertsFrameWindowsForm();
-        alertsFrameWindowsForm.scrollDown();
-        alertsFrameWindowsForm.browserWindowsButtonClick();
+        alertsFrameWindowsForm.browserWindowsBtnClick();
         BrowserWindowsForm browserWindowsForm = new BrowserWindowsForm();
         CustomLogger.info("Step 2. Page with Browser Windows form is open.");
 
@@ -47,7 +47,6 @@ public class HandlesTest extends BaseTest{
         Assert.assertTrue(browserWindowsForm.isPageOpened(),
                 "Page with Browser Windows form is not open!");
 
-        browserWindowsForm.scrollDown();
         browserWindowsForm
                 .elementsButtonClick()
                 .linksButtonClick();

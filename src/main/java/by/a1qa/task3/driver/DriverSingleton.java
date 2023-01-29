@@ -1,25 +1,25 @@
 package by.a1qa.task3.driver;
 
 import by.a1qa.task3.util.ConfigManager;
+import by.a1qa.task3.util.CustomLogger;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.json.simple.parser.ParseException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-
-import java.util.List;
+import java.io.IOException;
 
 public class DriverSingleton {
-
     private static WebDriver driver;
 
-    private DriverSingleton(){}
-
-    public static WebDriver getDriver(){
+    private DriverSingleton(){
+    }
+    public static WebDriver getDriver() throws IOException, ParseException {
         if(driver == null){
             String browserName = ConfigManager.getBrowserName();
-            List<String> options = ConfigManager.getOptions();
+            String options = ConfigManager.getOptions();
             switch (browserName) {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
@@ -38,5 +38,10 @@ public class DriverSingleton {
             }
         }
         return driver;
+    }
+    public static void closeBrowser() throws IOException, ParseException {
+        CustomLogger.info("BrowserUtil.closeBrowser()");
+        DriverSingleton.getDriver().quit();
+        driver = null;
     }
 }
